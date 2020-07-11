@@ -132,11 +132,10 @@
 
 			// Modify DOM
 			$input.addClass("stepper-input")
-				  .wrap('<div class="stepper ' + opts.customClass + '" />')
-				  .after('<span class="stepper-arrow up">' + opts.labels.up + '</span><span class="stepper-arrow down">' + opts.labels.down + '</span>');
+				  .after('<div class="stepper ' + opts.customClass + '" ><span class="stepper-arrow up">' + opts.labels.up + '</span><span class="stepper-arrow down">' + opts.labels.down + '</span></div>');
 
 			// Store data
-			var $stepper = $input.parent(".stepper"),
+			var $stepper = $input.siblings(".stepper"),
 				data = $.extend({
 					$stepper: $stepper,
 					$input: $input,
@@ -155,10 +154,10 @@
 			}
 
 			// Bind keyboard events
-			$stepper.on("keypress", ".stepper-input", data, _onKeyup);
+			$stepper.parent().on("keypress", ".stepper-input", data, _onKeyup);
 
 			// Bind click events
-			$stepper.on("touchstart.stepper mousedown.stepper", ".stepper-arrow", data, _onMouseDown)
+			$stepper.parent().on("touchstart.stepper mousedown.stepper", ".stepper-arrow", data, _onMouseDown)
 					.data("stepper", data);
 		}
 	}
